@@ -1,5 +1,5 @@
 package ca.ulaval.glo4002.reservation.domain.Utils;
 
-public interface NumberGenerator {
+public interface IdentifierGenerator {
     long getNextSequenceNumber();
 }

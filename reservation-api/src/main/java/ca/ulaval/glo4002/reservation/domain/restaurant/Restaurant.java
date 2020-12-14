@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.reservation.domain.restaurant;
 
-import ca.ulaval.glo4002.reservation.domain.Utils.NumberGenerator;
+import ca.ulaval.glo4002.reservation.domain.Utils.IdentifierGenerator;
 import ca.ulaval.glo4002.reservation.domain.customer.Customer;
 import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.exception.configurationException.InvalidTimeFrame;
@@ -18,22 +18,22 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class Restaurant {
-  private       RestaurantContextRepository restaurantContextRepository;
-  private       IngredientRepository        ingredientRepository;
-  private       ReservationRepository       reservationRepository;
-  private       ChefService                 chefService;
-  private       NumberGenerator numberGenerator;
+  private RestaurantContextRepository restaurantContextRepository;
+  private IngredientRepository        ingredientRepository;
+  private ReservationRepository       reservationRepository;
+  private ChefService                 chefService;
+  private IdentifierGenerator         identifierGenerator;
 
   private RestaurantConfiguration context;
 
   public Restaurant(RestaurantContextRepository restaurantContextRepository,
                     IngredientRepository ingredientRepository, ReservationRepository reservationRepository,
-                    ChefService chefService, NumberGenerator numberGenerator) {
+                    ChefService chefService, IdentifierGenerator identifierGenerator) {
     this.restaurantContextRepository = restaurantContextRepository;
     this.ingredientRepository = ingredientRepository;
     this.reservationRepository = reservationRepository;
     this.chefService = chefService;
-    this.numberGenerator = numberGenerator;
+    this.identifierGenerator = identifierGenerator;
     this.context = restaurantContextRepository.get();
   }
 
@@ -47,9 +47,9 @@ public class Restaurant {
     IngredientList availableIngredients = ingredientRepository.findAll();
     filterOutLimitedIngredients(availableIngredients, this.context.getEventPeriodStartDate().countDaysFrom(reservationRequest.dinnerDate));
 
-    Reservation reservation = Reservation.from(reservationRequest,
-                                               availableIngredients,
-                                               ReservationNumber.create(reservationRequest.vendorCode, numberGenerator.getNextSequenceNumber()));
+    ReservationNumber reservationNumber = ReservationNumber.create(reservationRequest.vendorCode, identifierGenerator.getNextSequenceNumber());
+    Reservation reservation = Reservation.from(reservationRequest, availableIngredients, reservationNumber);
+
     validateSocialDistancing(reservation);
     validateReservationDate(reservation.getReservationDate());
     validateAllergies(reservation);

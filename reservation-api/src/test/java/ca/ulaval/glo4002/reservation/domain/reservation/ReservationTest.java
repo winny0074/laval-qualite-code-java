@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.reservation.domain.reservation;
 
 import ca.ulaval.glo4002.reservation.domain.Restriction;
-import ca.ulaval.glo4002.reservation.domain.Utils.NumberGenerator;
+import ca.ulaval.glo4002.reservation.domain.Utils.IdentifierGenerator;
 import ca.ulaval.glo4002.reservation.domain.ingredient.Ingredient;
 import ca.ulaval.glo4002.reservation.domain.ingredient.IngredientList;
 import ca.ulaval.glo4002.reservation.domain.ingredient.meal.MealType;
@@ -16,24 +16,24 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class ReservationTest {
-  private final IngredientList ALL_INGREDIENTS = makeListOfAllIngredientsInRestrictions();
-  private ReservationRequest   basicReservationRequest;
-  private NumberGenerator      numberGenerator;
-  private ReservationNumber    identificationNumber;
+  private final IngredientList      ALL_INGREDIENTS = makeListOfAllIngredientsInRestrictions();
+  private       ReservationRequest  basicReservationRequest;
+  private       IdentifierGenerator identifierGenerator;
+  private       ReservationNumber   identificationNumber;
 
   @BeforeEach
   public void setUpBasicReservationRequest() {
 
     basicReservationRequest = ReservationRequestMother.createBasicRequest();
-    numberGenerator = mock(ReservationNumberGenerator.class);
+    identifierGenerator = mock(ReservationIdentifierGenerator.class);
 
-    doReturn(1l).when(numberGenerator).getNextSequenceNumber();
-    identificationNumber = ReservationNumber.create(basicReservationRequest.vendorCode, numberGenerator.getNextSequenceNumber());
+    doReturn(1l).when(identifierGenerator).getNextSequenceNumber();
+    identificationNumber = ReservationNumber.create(basicReservationRequest.vendorCode, identifierGenerator.getNextSequenceNumber());
   }
 
   @Test
   public void givenBasicReservationRequest_whenBuildFromIt_thenReturnsReservation() {
-    doReturn(1l).when(numberGenerator).getNextSequenceNumber();
+    doReturn(1l).when(identifierGenerator).getNextSequenceNumber();
 
     Reservation reservation = Reservation.from(basicReservationRequest, ALL_INGREDIENTS, identificationNumber);
 

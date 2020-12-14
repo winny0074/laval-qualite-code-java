@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.reservation.services;
 
 import ca.ulaval.glo4002.reservation.domain.ingredient.IngredientList;
-import ca.ulaval.glo4002.reservation.domain.reservation.ReservationNumberGenerator;
+import ca.ulaval.glo4002.reservation.domain.reservation.ReservationIdentifierGenerator;
 import ca.ulaval.glo4002.reservation.domain.restaurant.Restaurant;
 import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
 import ca.ulaval.glo4002.reservation.infrastructure.ReservationPersistenceInMemory;
@@ -30,7 +30,7 @@ public class IngredientsService {
                                      new ExternalIngredientClient(),
                                      new ReservationPersistenceInMemory(),
                                      new ChefService(),
-                                     ReservationNumberGenerator.getInstance());
+                                     ReservationIdentifierGenerator.getInstance());
   }
 
   public IngredientsService(Restaurant restaurant,

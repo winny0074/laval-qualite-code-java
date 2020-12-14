@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-class ReservationNumberGeneratorTest {
-  private ReservationNumberGenerator reservationNumberGenerator =
-      ReservationNumberGenerator.getInstance();
+class ReservationIdentifierGeneratorTest {
+  private ReservationIdentifierGenerator reservationNumberGenerator =
+      ReservationIdentifierGenerator.getInstance();
 
   @Test
   public void whenGetNextReservationNumberTwice_thenResultShouldBeDifferent() {

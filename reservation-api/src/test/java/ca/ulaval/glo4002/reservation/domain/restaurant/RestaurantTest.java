@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.reservation.domain.restaurant;
 
-import ca.ulaval.glo4002.reservation.domain.Utils.NumberGenerator;
+import ca.ulaval.glo4002.reservation.domain.Utils.IdentifierGenerator;
 import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.exception.configurationException.InvalidTimeFrame;
 import ca.ulaval.glo4002.reservation.domain.exception.reservationException.ReservationNotFound;
@@ -37,7 +37,7 @@ public class RestaurantTest {
   private ReservationRequest          basicReservationRequest;
   private ReservationRepository       reservationRepository;
   private ChefService                 chefService;
-  public NumberGenerator numberGenerator;
+  public  IdentifierGenerator         identifierGenerator;
 
   @BeforeEach
   public void setUpBasicReservationRequest() {
@@ -52,7 +52,7 @@ public class RestaurantTest {
     ingredientRepository = mock(IngredientRepository.class);
     reservationRepository = mock(ReservationRepository.class);
     chefService = mock(ChefService.class);
-    numberGenerator = mock(ReservationNumberGenerator.class);
+    identifierGenerator = mock(ReservationIdentifierGenerator.class);
     ingredientList = new IngredientList();
     reservation = mock(Reservation.class);
 
@@ -62,38 +62,32 @@ public class RestaurantTest {
 //    when(restaurantContextRepository.findAll()).thenReturn(List.of(restaurantConfiguration));
     when(restaurantContextRepository.get()).thenReturn(restaurantConfiguration);
     when(restaurantConfiguration.getEventPeriodStartDate()).thenReturn(VALID_DINNER_DATE);
+    when(reservation.getReservationDate()).thenReturn(VALID_DINNER_DATE);
+    when(reservation.getIdentificationNumber()).thenReturn(A_RESERVATION_ID);
 //    when(restaurantConfiguration.getIngredientsForDate(VALID_DINNER_DATE)).thenReturn(ingredientList);
     when(ingredientRepository.findAll()).thenReturn(ingredientList);
 
     restaurant = new Restaurant(restaurantContextRepository, ingredientRepository,
-                                reservationRepository, chefService, numberGenerator);
+                                reservationRepository, chefService, identifierGenerator);
     restaurantSpy = spy(restaurant);
   }
 
   @Test
-  public void whenReserving_thenCallsIngredientRepositoryFindAll() {
+  public void givenAValidReservationRequest_whenReserve_thenCallsIngredientRepositoryFindAll() {
 
-    try (MockedStatic<Reservation> ReservationMock = mockStatic(Reservation.class)) {
-      try (MockedStatic<ReservationNumber> reservationNumberMockedStatic = mockStatic(ReservationNumber.class)) {
-        restaurantSpy = spy(restaurant);
+    doReserve(() -> verify(ingredientRepository).findAll());
+  }
 
-        when(reservation.getReservationDate()).thenReturn(VALID_DINNER_DATE);
-        doNothing().when(restaurantSpy).validateSocialDistancing(reservation);
-        doNothing().when(restaurantSpy).validateReservationDate(any());
-        doNothing().when(restaurantSpy).validateAllergies(reservation);
+  @Test
+  public void givenAValidReservationRequest_whenReserve_thenCallReservationSaveMethod() {
 
-        long nextSequenceNumber = numberGenerator.getNextSequenceNumber();
-        ReservationNumber reservationNumber = ReservationNumber.create(basicReservationRequest.vendorCode, nextSequenceNumber);
+    doReserve(() -> verify(reservationRepository).save(reservation));
+  }
 
-        reservationNumberMockedStatic.when(() -> ReservationNumber.create(basicReservationRequest.vendorCode, nextSequenceNumber)).thenReturn(A_RESERVATION_ID);
-        ReservationMock.when(() -> Reservation.from(basicReservationRequest, ingredientList, reservationNumber)).thenReturn(reservation);
+  @Test
+  public void givenAValidReservationRequest_whenReserve_thenCallChefSaveMethod() {
 
-        restaurantSpy.reserve(basicReservationRequest);
-
-      }
-    }
-
-    verify(ingredientRepository).findAll();
+    doReserve(() -> verify(chefService).save(reservation.getDinnerDate(), reservation.getAllRestrictions()));
   }
 
   @Test
@@ -177,6 +171,30 @@ public class RestaurantTest {
     doNothing().when(restaurantSpy).validateSocialDistancing(reservation);
     doNothing().when(restaurantSpy).validateReservationDate(any());
     doNothing().when(restaurantSpy).validateAllergies(reservation);
-
   }
+
+  public void doReserve(Runnable runnable) {
+
+    try (MockedStatic<Reservation> ReservationMock = mockStatic(Reservation.class)) {
+      try (MockedStatic<ReservationNumber> reservationNumberMockedStatic = mockStatic(ReservationNumber.class)) {
+        restaurantSpy = spy(restaurant);
+
+        doNothingWhileValidating();
+
+        long nextSequenceNumber = identifierGenerator.getNextSequenceNumber();
+
+        reservationNumberMockedStatic.when(() -> ReservationNumber.create(basicReservationRequest.vendorCode, nextSequenceNumber))
+                                     .thenReturn(A_RESERVATION_ID);
+
+        ReservationMock.when(() -> Reservation.from(basicReservationRequest, ingredientList, A_RESERVATION_ID))
+                       .thenReturn(reservation);
+
+        restaurantSpy.reserve(basicReservationRequest);
+
+      }
+    }
+
+    runnable.run();
+  }
+
 }

@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.reservation.services;
 
 import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.exception.ingredientsReportsException.InvalidDate;
-import ca.ulaval.glo4002.reservation.domain.reservation.ReservationNumberGenerator;
+import ca.ulaval.glo4002.reservation.domain.reservation.ReservationIdentifierGenerator;
 import ca.ulaval.glo4002.reservation.domain.restaurant.Restaurant;
 import ca.ulaval.glo4002.reservation.infrastructure.ReservationPersistenceInMemory;
 import ca.ulaval.glo4002.reservation.infrastructure.RestaurantContextPersistenceInMemory;
@@ -20,7 +20,7 @@ public class ConfigurationService {
                                      new ExternalIngredientClient(),
                                      new ReservationPersistenceInMemory(),
                                      new ChefService(),
-                                     ReservationNumberGenerator.getInstance());
+                                     ReservationIdentifierGenerator.getInstance());
   }
 
   public ConfigurationService(Restaurant restaurant) {
