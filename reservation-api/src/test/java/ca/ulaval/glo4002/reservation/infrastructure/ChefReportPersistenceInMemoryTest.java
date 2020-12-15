@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.reservation.infrastructure;
 
 import ca.ulaval.glo4002.reservation.domain.Restriction;
 import ca.ulaval.glo4002.reservation.domain.chef.Chef;
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.money.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

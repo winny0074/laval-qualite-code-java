@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.reservation.domain.restaurant;
 
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 
 public class RestaurantConfiguration {
 

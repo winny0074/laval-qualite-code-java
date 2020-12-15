@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.reservation.services.assemblers;
 
 import ca.ulaval.glo4002.reservation.domain.customer.CustomerRequest;
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.reservation.ReservationRequest;
 import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.customer.CustomerDto;
 import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.reservation.ReservationDto;

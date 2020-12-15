@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.reservation.infrastructure;
 
 import ca.ulaval.glo4002.reservation.domain.chef.Chef;
 import ca.ulaval.glo4002.reservation.domain.chef.ChefReportRepository;
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

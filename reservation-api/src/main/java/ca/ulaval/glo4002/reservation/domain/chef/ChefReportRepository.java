@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.reservation.domain.chef;
 
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import java.util.List;
 import java.util.Map;
 

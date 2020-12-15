@@ -4,7 +4,7 @@ import ca.ulaval.glo4002.reservation.domain.restaurant.RestaurantConfiguration;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.restaurant.Restaurant;
 import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.configuration.ConfigurationDto;
 import org.junit.jupiter.api.BeforeEach;

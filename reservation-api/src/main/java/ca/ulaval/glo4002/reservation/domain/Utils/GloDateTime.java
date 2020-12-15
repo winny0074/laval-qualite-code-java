@@ -1,4 +1,4 @@
-package ca.ulaval.glo4002.reservation.domain.date;
+package ca.ulaval.glo4002.reservation.domain.Utils;
 
 import ca.ulaval.glo4002.reservation.domain.exception.ingredientsReportsException.InvalidDate;
 import ca.ulaval.glo4002.reservation.domain.exception.reservationException.InvalidFormat;

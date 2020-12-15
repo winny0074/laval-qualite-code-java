@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.reservation.services;
 
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.exception.ingredientsReportsException.InvalidDate;
 import ca.ulaval.glo4002.reservation.domain.reservation.ReservationIdentifierGenerator;
 import ca.ulaval.glo4002.reservation.domain.restaurant.Restaurant;

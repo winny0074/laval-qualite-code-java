@@ -4,15 +4,13 @@ import ca.ulaval.glo4002.reservation.domain.customer.CustomerRequest;
 import ca.ulaval.glo4002.reservation.domain.Restriction;
 import ca.ulaval.glo4002.reservation.domain.country.Country;
 import ca.ulaval.glo4002.reservation.domain.customer.Customer;
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.ingredient.IngredientList;
 import ca.ulaval.glo4002.reservation.domain.money.Money;
 import ca.ulaval.glo4002.reservation.domain.table.Table;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Reservation {

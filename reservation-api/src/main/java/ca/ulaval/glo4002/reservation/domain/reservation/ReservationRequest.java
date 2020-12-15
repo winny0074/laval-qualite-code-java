@@ -1,7 +1,7 @@
 package ca.ulaval.glo4002.reservation.domain.reservation;
 
 import ca.ulaval.glo4002.reservation.domain.customer.CustomerRequest;
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 
 import java.util.Collection;
 

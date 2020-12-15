@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.reservation.services;
 
 import ca.ulaval.glo4002.reservation.domain.Restriction;
 import ca.ulaval.glo4002.reservation.domain.chef.*;
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.exception.chefsReportsException.NoChefAvailableException;
 import ca.ulaval.glo4002.reservation.infrastructure.ChefReportPersistenceInMemory;
 import ca.ulaval.glo4002.reservation.infrastructure.ChefPersistenceInMemory;

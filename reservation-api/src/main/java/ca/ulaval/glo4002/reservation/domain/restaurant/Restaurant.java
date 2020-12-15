@@ -2,7 +2,7 @@ package ca.ulaval.glo4002.reservation.domain.restaurant;
 
 import ca.ulaval.glo4002.reservation.domain.Utils.IdentifierGenerator;
 import ca.ulaval.glo4002.reservation.domain.customer.Customer;
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.exception.configurationException.InvalidTimeFrame;
 import ca.ulaval.glo4002.reservation.domain.exception.reservationException.*;
 import ca.ulaval.glo4002.reservation.domain.ingredient.IngredientList;

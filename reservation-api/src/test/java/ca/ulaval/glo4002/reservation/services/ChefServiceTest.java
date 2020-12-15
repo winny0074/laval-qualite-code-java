@@ -5,7 +5,7 @@ import static ca.ulaval.glo4002.reservation.domain.Restriction.*;
 import ca.ulaval.glo4002.reservation.domain.chef.Chef;
 import ca.ulaval.glo4002.reservation.domain.chef.ChefReportRepository;
 import ca.ulaval.glo4002.reservation.domain.chef.ChefRepository;
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.exception.chefsReportsException.NoChefAvailableException;
 import ca.ulaval.glo4002.reservation.domain.money.Money;
 import ca.ulaval.glo4002.reservation.services.assemblers.GlobalChefsReportAssembler;

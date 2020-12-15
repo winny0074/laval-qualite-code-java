@@ -1,10 +1,9 @@
 package ca.ulaval.glo4002.reservation.infrastructure;
 
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.exception.reservationException.ReservationNotFound;
 import ca.ulaval.glo4002.reservation.domain.reservation.Reservation;
 import ca.ulaval.glo4002.reservation.domain.reservation.ReservationNumber;
-import ca.ulaval.glo4002.reservation.domain.reservation.ReservationIdentifierGenerator;
 import ca.ulaval.glo4002.reservation.domain.reservation.ReservationRepository;
 
 import java.util.ArrayList;
@@ -16,11 +15,9 @@ import java.util.stream.Collectors;
 public class ReservationPersistenceInMemory implements ReservationRepository {
 
   private final HashMap<ReservationNumber, Reservation> reservations;
-  private final ReservationIdentifierGenerator          reservationNumberGenerator;
 
   public ReservationPersistenceInMemory() {
     this.reservations = new HashMap<>();
-    this.reservationNumberGenerator = ReservationIdentifierGenerator.getInstance();
   }
 
   public List<Reservation> findAll() {

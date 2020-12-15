@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.reservation.services.assemblers;
 
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.money.Money;
 import ca.ulaval.glo4002.reservation.domain.reservation.Reservation;
 import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.customer.CustomerDto;

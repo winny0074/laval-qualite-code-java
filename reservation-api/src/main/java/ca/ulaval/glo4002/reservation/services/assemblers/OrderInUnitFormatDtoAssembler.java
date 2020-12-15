@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.reservation.services.assemblers;
 
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.ingredient.IngredientList;
 import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.ingredient.IngredientListDto;
 import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.ingredient.OrderInUnitsFormatDto;

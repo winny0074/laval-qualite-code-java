@@ -1,6 +1,6 @@
 package ca.ulaval.glo4002.reservation.domain.reservation;
 
-import ca.ulaval.glo4002.reservation.domain.date.GloDateTime;
+import ca.ulaval.glo4002.reservation.domain.Utils.GloDateTime;
 import ca.ulaval.glo4002.reservation.domain.exception.reservationException.ReservationNotFound;
 
 import java.util.List;
