@@ -14,6 +14,7 @@ import ca.ulaval.glo4002.reservation.domain.reservation.ReservationRepository;
 import ca.ulaval.glo4002.reservation.domain.reservation.ReservationRequest;
 import ca.ulaval.glo4002.reservation.services.ChefService;
 
+import javax.inject.Inject;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +28,7 @@ public class Restaurant {
 
   private RestaurantConfiguration context;
 
+  @Inject
   public Restaurant(RestaurantContextRepository restaurantContextRepository,
                     IngredientRepository ingredientRepository, ReservationRepository reservationRepository,
                     ChefService chefService, IdentifierGenerator identifierGenerator) {
@@ -35,11 +37,6 @@ public class Restaurant {
     this.reservationRepository = reservationRepository;
     this.chefService = chefService;
     this.identifierGenerator = identifierGenerator;
-    this.context = restaurantContextRepository.get();
-  }
-
-  public Restaurant(RestaurantContextRepository restaurantContextRepository) {
-    this.restaurantContextRepository = restaurantContextRepository;
     this.context = restaurantContextRepository.get();
   }
 

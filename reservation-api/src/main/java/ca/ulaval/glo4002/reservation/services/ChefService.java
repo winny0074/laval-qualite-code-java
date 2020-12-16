@@ -9,6 +9,7 @@ import ca.ulaval.glo4002.reservation.infrastructure.ChefPersistenceInMemory;
 import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.chef.GlobalChefsReportDto;
 import ca.ulaval.glo4002.reservation.services.assemblers.GlobalChefsReportAssembler;
 
+import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -20,12 +21,7 @@ public class ChefService {
   public ChefRepository chefRepository;
   public GlobalChefsReportAssembler globalChefsReportAssembler;
 
-  public ChefService() {
-    this.chefReportRepository = ChefReportPersistenceInMemory.getInstance();
-    this.chefRepository = new ChefPersistenceInMemory();
-    this.globalChefsReportAssembler =  new GlobalChefsReportAssembler();
-  }
-
+  @Inject
   public ChefService(ChefReportRepository chefReportRepository, ChefRepository chefRepository, GlobalChefsReportAssembler globalChefsReportAssembler) {
     this.chefReportRepository = chefReportRepository;
     this.chefRepository = chefRepository;

@@ -2,6 +2,7 @@ package ca.ulaval.glo4002.reservation.interfaces.rest;
 
 import ca.ulaval.glo4002.reservation.services.FinancialReportService;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -11,10 +12,11 @@ import javax.ws.rs.core.Response;
 @Path("/reports")
 public class FinancialReportResource {
 
-    private final FinancialReportService financialReportService ;
+    private FinancialReportService financialReportService ;
 
-    public FinancialReportResource() {
-        financialReportService = new FinancialReportService();
+    @Inject
+    public FinancialReportResource(FinancialReportService financialReportService) {
+        this.financialReportService = financialReportService;
     }
 
 

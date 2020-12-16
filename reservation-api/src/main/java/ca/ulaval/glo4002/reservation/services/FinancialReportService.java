@@ -5,6 +5,7 @@ import ca.ulaval.glo4002.reservation.infrastructure.RestaurantContextPersistence
 import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.FinancialRapport.FinancialReportDto;
 import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.ingredient.OrderInTotalFormatDto;
 
+import javax.inject.Inject;
 import java.math.BigDecimal;
 
 public class FinancialReportService {
@@ -12,12 +13,7 @@ public class FinancialReportService {
   private ChefService                 chefService;
   private IngredientsService ingredientsService;
 
-  public FinancialReportService() {
-    this.reservationService = new ReservationService();
-    this.chefService = new ChefService();
-    this.ingredientsService = new IngredientsService();
-  }
-
+  @Inject
   public FinancialReportService(ReservationService reservationService, ChefService chefService, IngredientsService ingredientsService) {
     this.reservationService = reservationService;
     this.chefService = chefService;

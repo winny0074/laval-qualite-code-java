@@ -18,8 +18,8 @@ public class ChefsReportResourceTest {
 
     @BeforeEach
     public void setup(){
-        chefsReportResource = new ChefsReportResource();
         chefService = mock(ChefService.class);
+        chefsReportResource = new ChefsReportResource(chefService);
     }
 
     @Test

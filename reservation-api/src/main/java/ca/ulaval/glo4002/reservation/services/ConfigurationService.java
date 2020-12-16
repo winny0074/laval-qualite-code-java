@@ -10,19 +10,14 @@ import ca.ulaval.glo4002.reservation.infrastructure.supplier.ExternalIngredientC
 import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.configuration.ConfigurationDto;
 import ca.ulaval.glo4002.reservation.interfaces.rest.exception.interfacesException.configurationException.InvalidPeriodDate;
 
+import javax.inject.Inject;
+
 public class ConfigurationService {
   private final String HOPPENING_NAME = "hoppening";
   private final String USE_OLD_DATE_INDICATOR = "OLD_DATE";
   private final Restaurant restaurant;
 
-  public ConfigurationService() {
-    this.restaurant = new Restaurant(RestaurantContextPersistenceInMemory.getInstance(),
-                                     new ExternalIngredientClient(),
-                                     new ReservationPersistenceInMemory(),
-                                     new ChefService(),
-                                     ReservationIdentifierGenerator.getInstance());
-  }
-
+  @Inject
   public ConfigurationService(Restaurant restaurant) {
     this.restaurant = restaurant;
   }

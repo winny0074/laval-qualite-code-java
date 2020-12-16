@@ -118,4 +118,12 @@ class ReservationServiceTest {
 
     assertThrows(AllergyException.class, executable);
   }
+
+//  @Test
+//  public void given_when_then() {
+//    ReservationService reservationServiceSpy = spy(reservationService);
+//    doReturn().when(reservationServiceSpy).findAll();
+//
+//    reservationService.getReservationTotalPrice();
+//  }
 }

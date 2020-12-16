@@ -14,6 +14,7 @@ import ca.ulaval.glo4002.reservation.domain.exception.reservationException.Inval
 import ca.ulaval.glo4002.reservation.services.assemblers.OrderInTotalFormatDtoAssembler;
 import ca.ulaval.glo4002.reservation.services.assemblers.OrderInUnitFormatDtoAssembler;
 
+import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -24,16 +25,7 @@ public class IngredientsService {
   private final OrderInUnitFormatDtoAssembler orderInUnitFormatDtoAssembler;
   private final OrderInTotalFormatDtoAssembler orderInTotalFormatDtoAssembler;
 
-  public IngredientsService() {
-    this.orderInTotalFormatDtoAssembler = new OrderInTotalFormatDtoAssembler();
-    this.orderInUnitFormatDtoAssembler = new OrderInUnitFormatDtoAssembler();
-    this.restaurant = new Restaurant(RestaurantContextPersistenceInMemory.getInstance(),
-                                     new ExternalIngredientClient(),
-                                     ReservationPersistenceInMemory.getInstance(),
-                                     new ChefService(),
-                                     ReservationIdentifierGenerator.getInstance());
-  }
-
+  @Inject
   public IngredientsService(Restaurant restaurant,
                             OrderInTotalFormatDtoAssembler orderInTotalFormatDtoAssembler,
                             OrderInUnitFormatDtoAssembler orderInUnitFormatDtoAssembler) {
@@ -62,8 +54,8 @@ public class IngredientsService {
   }
 
   public BigDecimal getTotalExpense() throws InvalidFormat {
-    OrderInTotalFormatDto ingredientsToOrderInTotalFormat = getIngredientsToOrderInTotalFormat(restaurant.getContext().getEventPeriodStartDate().toPresentationDateFormat(),
-                                                                                               restaurant.getContext().getEventPeriodEndDate().toPresentationDateFormat());
+    OrderInTotalFormatDto ingredientsToOrderInTotalFormat = getIngredientsToOrderInTotalFormat(restaurant.getContext().getEventPeriodStartDate().toLocalDateFormat(),
+                                                                                               restaurant.getContext().getEventPeriodEndDate().toLocalDateFormat());
     return BigDecimal.valueOf(ingredientsToOrderInTotalFormat.getTotalPrice());
   }
 

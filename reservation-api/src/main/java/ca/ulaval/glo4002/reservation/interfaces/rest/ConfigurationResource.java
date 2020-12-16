@@ -4,6 +4,7 @@ import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.configuration.Configura
 import ca.ulaval.glo4002.reservation.interfaces.rest.validators.ConfigurationBodyValidator;
 import ca.ulaval.glo4002.reservation.services.ConfigurationService;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -14,11 +15,7 @@ public class ConfigurationResource {
   private final ConfigurationService configurationService;
   private final ConfigurationBodyValidator configurationBodyValidator;
 
-  public ConfigurationResource() {
-    this.configurationBodyValidator = new ConfigurationBodyValidator();
-    this.configurationService = new ConfigurationService();
-  }
-
+  @Inject
   public ConfigurationResource(
     ConfigurationBodyValidator configurationBodyValidator,
     ConfigurationService configurationService) {

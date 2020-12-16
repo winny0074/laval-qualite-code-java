@@ -14,6 +14,7 @@ import ca.ulaval.glo4002.reservation.infrastructure.supplier.ExternalIngredientC
 import ca.ulaval.glo4002.reservation.services.assemblers.ReservationRequestAssembler;
 import ca.ulaval.glo4002.reservation.services.assemblers.ReservationDtoAssembler;
 
+import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
@@ -24,16 +25,7 @@ public class ReservationService {
   private final ReservationRequestAssembler reservationRequestAssembler;
   private final ReservationDtoAssembler reservationDtoAssembler;
 
-  public ReservationService() {
-    this.reservationRequestAssembler= new ReservationRequestAssembler();
-    this.reservationDtoAssembler = new ReservationDtoAssembler();
-    this.restaurant = new Restaurant(RestaurantContextPersistenceInMemory.getInstance(),
-                                     new ExternalIngredientClient(),
-                                     ReservationPersistenceInMemory.getInstance(),
-                                     new ChefService(),
-                                     ReservationIdentifierGenerator.getInstance());
-  }
-
+  @Inject
   public ReservationService(Restaurant restaurant,
                             ReservationRequestAssembler reservationRequestAssembler,
                             ReservationDtoAssembler reservationDtoAssembler) {

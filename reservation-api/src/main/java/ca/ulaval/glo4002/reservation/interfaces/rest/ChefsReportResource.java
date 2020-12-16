@@ -1,6 +1,8 @@
 package ca.ulaval.glo4002.reservation.interfaces.rest;
 
 import ca.ulaval.glo4002.reservation.services.ChefService;
+
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -8,10 +10,11 @@ import javax.ws.rs.core.Response;
 @Path("/reports")
 public class ChefsReportResource {
 
-    private final ChefService chefService ;
+    private ChefService chefService ;
 
-    public ChefsReportResource() {
-        chefService = new ChefService();
+    @Inject
+    public ChefsReportResource(ChefService chefService) {
+        this.chefService = chefService;
     }
 
 

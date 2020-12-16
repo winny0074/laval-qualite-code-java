@@ -4,20 +4,18 @@ import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.reservation.Reservation
 import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.reservation.ResponseReservationDto;
 import ca.ulaval.glo4002.reservation.interfaces.rest.validators.ReservationBodyValidator;
 import ca.ulaval.glo4002.reservation.services.ReservationService;
+
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/reservations")
 public class ReservationResource {
-  private final ReservationService reservationService;
-  private final ReservationBodyValidator reservationBodyValidator;
+  private ReservationService reservationService;
+  private ReservationBodyValidator reservationBodyValidator;
 
-  public ReservationResource() {
-    this.reservationBodyValidator = new ReservationBodyValidator();
-    this.reservationService = new ReservationService();
-  }
-
+  @Inject
   public ReservationResource(
       ReservationBodyValidator reservationBodyValidator,
       ReservationService reservationService) {

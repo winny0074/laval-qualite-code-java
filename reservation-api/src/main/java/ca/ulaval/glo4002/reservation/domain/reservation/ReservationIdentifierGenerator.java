@@ -8,7 +8,7 @@ public class ReservationIdentifierGenerator implements IdentifierGenerator {
   private static final AtomicLong                     nextReservationNumber = new AtomicLong(1L);
   private static       ReservationIdentifierGenerator instance;
 
-  private ReservationIdentifierGenerator() {}
+  public ReservationIdentifierGenerator() {}
 
   public static ReservationIdentifierGenerator getInstance() {
     // https://www.javacodemonk.com/threadsafe-singleton-design-pattern-java-806ad7e6

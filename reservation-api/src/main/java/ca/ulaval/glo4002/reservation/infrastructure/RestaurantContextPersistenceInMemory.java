@@ -16,8 +16,7 @@ public class RestaurantContextPersistenceInMemory implements RestaurantContextRe
   private static final int                                  MAXIMUM_DAILY_OCCUPATION       = 42;
   private              RestaurantConfiguration              restaurantConfiguration;
 
-  private RestaurantContextPersistenceInMemory() {
-//    periods = new LinkedList<>();
+  public RestaurantContextPersistenceInMemory() {
     restaurantConfiguration =loadData();
   }
 

@@ -6,6 +6,7 @@ import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.ingredient.OrderInUnits
 import ca.ulaval.glo4002.reservation.interfaces.rest.validators.IngredientsReportsParametersValidator;
 import ca.ulaval.glo4002.reservation.services.IngredientsService;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -18,14 +19,10 @@ public class IngredientsReportsResource {
 
   public static final String TYPE_UNIT = "unit";
   public static final String TYPE_TOTAL = "total";
-  private final IngredientsService ingredientsService;
-  private final IngredientsReportsParametersValidator ingredientsReportsParametersValidator;
+  private IngredientsService ingredientsService;
+  private IngredientsReportsParametersValidator ingredientsReportsParametersValidator;
 
-  public IngredientsReportsResource() {
-    ingredientsService = new IngredientsService();
-    ingredientsReportsParametersValidator = new IngredientsReportsParametersValidator();
-  }
-
+  @Inject
   public IngredientsReportsResource(
       IngredientsService ingredientsService,
       IngredientsReportsParametersValidator ingredientsReportsParametersValidator) {
