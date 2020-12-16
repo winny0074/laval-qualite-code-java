@@ -14,6 +14,10 @@ import ca.ulaval.glo4002.reservation.infrastructure.supplier.ExternalIngredientC
 import ca.ulaval.glo4002.reservation.services.assemblers.ReservationRequestAssembler;
 import ca.ulaval.glo4002.reservation.services.assemblers.ReservationDtoAssembler;
 
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReservationService {
   private final Restaurant restaurant;
@@ -25,7 +29,7 @@ public class ReservationService {
     this.reservationDtoAssembler = new ReservationDtoAssembler();
     this.restaurant = new Restaurant(RestaurantContextPersistenceInMemory.getInstance(),
                                      new ExternalIngredientClient(),
-                                     new ReservationPersistenceInMemory(),
+                                     ReservationPersistenceInMemory.getInstance(),
                                      new ChefService(),
                                      ReservationIdentifierGenerator.getInstance());
   }
@@ -46,5 +50,17 @@ public class ReservationService {
   public String create(ReservationDto reservationDto) throws DomainException {
     ReservationRequest reservationRequest = reservationRequestAssembler.from(reservationDto);
     return restaurant.reserve(reservationRequest);
+  }
+
+  public List<ResponseReservationDto> findAll() throws DomainException {
+    List<Reservation> reservations = restaurant.findAll();
+    return reservationDtoAssembler.from(reservations);
+  }
+
+  public double getReservationTotalPrice() throws DomainException {
+    return findAll().stream()
+                    .map(reservation -> reservation.reservationPrice)
+                    .reduce(BigDecimal.valueOf(0d), BigDecimal::add)
+                    .doubleValue();
   }
 }

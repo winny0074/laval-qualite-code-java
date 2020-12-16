@@ -147,7 +147,7 @@ public class RestaurantConfiguration {
 //  }
 //
 //  // Ne pas retirer - Est utilisé implicitement pour certains tests
-//  public Collection<Reservation> findAllReservations() {
+//  public Collection<Reservation> findAll() {
 //    return reservationRepository.findAll();
 //  }
 //

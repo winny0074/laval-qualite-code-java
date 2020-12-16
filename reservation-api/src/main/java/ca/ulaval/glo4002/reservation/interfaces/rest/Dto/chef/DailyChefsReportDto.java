@@ -20,4 +20,8 @@ public class DailyChefsReportDto {
         this.chefs = chefs;
         this.totalPrice = totalPrice;
     }
+
+    public long getTotalPrice() {
+        return totalPrice;
+    }
 }

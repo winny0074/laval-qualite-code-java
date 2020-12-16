@@ -15,6 +15,7 @@ import ca.ulaval.glo4002.reservation.domain.reservation.ReservationRequest;
 import ca.ulaval.glo4002.reservation.services.ChefService;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Restaurant {
@@ -158,8 +159,7 @@ public class Restaurant {
     return context;
   }
 
-  // Ne pas retirer - Est utilisé implicitement pour certains tests
-  public Collection<Reservation> findAllReservations() {
+  public List<Reservation> findAll() {
     return reservationRepository.findAll();
   }
 
@@ -167,4 +167,5 @@ public class Restaurant {
   public void remove(Reservation reservation) {
     reservationRepository.remove(reservation);
   }
+
 }

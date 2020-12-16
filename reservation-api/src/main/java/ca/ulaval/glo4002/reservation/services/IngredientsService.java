@@ -28,7 +28,7 @@ public class IngredientsService {
     this.orderInUnitFormatDtoAssembler = new OrderInUnitFormatDtoAssembler();
     this.restaurant = new Restaurant(RestaurantContextPersistenceInMemory.getInstance(),
                                      new ExternalIngredientClient(),
-                                     new ReservationPersistenceInMemory(),
+                                     ReservationPersistenceInMemory.getInstance(),
                                      new ChefService(),
                                      ReservationIdentifierGenerator.getInstance());
   }

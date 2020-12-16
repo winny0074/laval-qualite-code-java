@@ -9,10 +9,14 @@ public class OrderInTotalFormatDto {
   public List<IngredientsDto> ingredientList;
 
   @JsonProperty(value = "totalPrice")
-  public float totalPrice;
+  private float totalPrice;
 
   public OrderInTotalFormatDto(List<IngredientsDto> ingredientList, float totalPrice) {
     this.ingredientList = ingredientList;
     this.totalPrice = totalPrice;
+  }
+
+  public float getTotalPrice() {
+    return totalPrice;
   }
 }

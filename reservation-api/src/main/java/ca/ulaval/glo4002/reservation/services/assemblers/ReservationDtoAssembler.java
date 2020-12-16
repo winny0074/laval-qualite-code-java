@@ -7,6 +7,7 @@ import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.customer.CustomerDto;
 import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.reservation.ResponseReservationDto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReservationDtoAssembler {
   private final CustomerDtoAssembler customerDtoAssembler;
@@ -26,5 +27,12 @@ public class ReservationDtoAssembler {
 
     return new ResponseReservationDto(
         price.toBigDecimal(), date.toIsoDateTimeFormat(), customerDtos);
+  }
+
+  public List<ResponseReservationDto> from(List<Reservation> reservations) {
+
+    return reservations.stream()
+                        .map(this::from)
+                        .collect(Collectors.toList());
   }
 }

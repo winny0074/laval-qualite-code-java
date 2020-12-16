@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderInUnitsFormatDto {
+
   @JsonProperty("Dates")
   public List<OrderUnitDto> orders = new ArrayList<>();
 

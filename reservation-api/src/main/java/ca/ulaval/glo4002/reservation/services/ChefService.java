@@ -8,6 +8,8 @@ import ca.ulaval.glo4002.reservation.infrastructure.ChefReportPersistenceInMemor
 import ca.ulaval.glo4002.reservation.infrastructure.ChefPersistenceInMemory;
 import ca.ulaval.glo4002.reservation.interfaces.rest.Dto.chef.GlobalChefsReportDto;
 import ca.ulaval.glo4002.reservation.services.assemblers.GlobalChefsReportAssembler;
+
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
@@ -171,8 +173,19 @@ public class ChefService {
       globalChefsReport.getDailyChefReport().add(new DailyChefsReport(date, chefNames, totalPrice));
     });
 
-    globalChefsReport.getDailyChefReport().stream().sorted(Comparator.comparing(DailyChefsReport::getDate));
+    globalChefsReport.getDailyChefReport()
+                     .stream()
+                     .sorted(Comparator.comparing(DailyChefsReport::getDate));
 
     return globalChefsReportAssembler.from(globalChefsReport);
+  }
+
+  public BigDecimal getTotalExpense() {
+    GlobalChefsReportDto globalChefReport = getGlobalChefReport();
+    return globalChefReport.getDailyReport()
+                           .stream()
+                           .map(rapot -> rapot.getTotalPrice())
+                           .map(BigDecimal::new)
+                           .reduce(BigDecimal.valueOf(0), BigDecimal::add);
   }
 }

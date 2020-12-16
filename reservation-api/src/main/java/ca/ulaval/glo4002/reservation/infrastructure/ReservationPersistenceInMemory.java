@@ -15,9 +15,23 @@ import java.util.stream.Collectors;
 public class ReservationPersistenceInMemory implements ReservationRepository {
 
   private final HashMap<ReservationNumber, Reservation> reservations;
+  private static       ReservationPersistenceInMemory instance;
 
   public ReservationPersistenceInMemory() {
     this.reservations = new HashMap<>();
+  }
+
+  public static ReservationPersistenceInMemory getInstance() {
+    // https://www.javacodemonk.com/threadsafe-singleton-design-pattern-java-806ad7e6
+
+    ReservationPersistenceInMemory localInstanceReference = instance;
+    if (localInstanceReference == null) {
+      synchronized (RestaurantContextPersistenceInMemory.class) {
+        localInstanceReference = instance;
+        if (localInstanceReference == null) instance = new ReservationPersistenceInMemory();
+      }
+    }
+    return instance;
   }
 
   public List<Reservation> findAll() {

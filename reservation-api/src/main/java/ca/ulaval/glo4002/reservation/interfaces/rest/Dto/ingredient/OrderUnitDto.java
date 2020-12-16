@@ -22,4 +22,8 @@ public class OrderUnitDto {
     this.ingredientList = ingredientList;
     this.totalPrice = totalPrice;
   }
+
+  public float getTotalPrice() {
+    return totalPrice;
+  }
 }
