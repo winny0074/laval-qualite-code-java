@@ -11,21 +11,17 @@ public class FinancialReportService {
   private ReservationService reservationService;
   private ChefService                 chefService;
   private IngredientsService ingredientsService;
-  private RestaurantConfiguration restaurantConfiguration;
 
   public FinancialReportService() {
     this.reservationService = new ReservationService();
     this.chefService = new ChefService();
     this.ingredientsService = new IngredientsService();
-    restaurantConfiguration = RestaurantContextPersistenceInMemory.getInstance().get();
   }
 
-  public FinancialReportService(ReservationService reservationService, ChefService chefService,
-                                IngredientsService ingredientsService, RestaurantConfiguration restaurantConfiguration) {
+  public FinancialReportService(ReservationService reservationService, ChefService chefService, IngredientsService ingredientsService) {
     this.reservationService = reservationService;
     this.chefService = chefService;
     this.ingredientsService = ingredientsService;
-    this.restaurantConfiguration = restaurantConfiguration;
   }
 
   public FinancialReportDto getReport() {
@@ -45,12 +41,9 @@ public class FinancialReportService {
   private BigDecimal getExpense() {
     BigDecimal globalChefReport = chefService.getTotalExpense();
 
-    OrderInTotalFormatDto ingredientsTotalOrder = ingredientsService.getIngredientsToOrderInTotalFormat(
-                                                                                  restaurantConfiguration.getEventPeriodStartDate().toLocalDateFormat(),
-                                                                                  restaurantConfiguration.getEventPeriodEndDate().toLocalDateFormat());
-    BigDecimal reduceIng = BigDecimal.valueOf(ingredientsTotalOrder.getTotalPrice());
+    BigDecimal ingredientsTotalOrder = ingredientsService.getTotalExpense();
 
-    return globalChefReport.add(reduceIng).abs();
+    return globalChefReport.add(ingredientsTotalOrder).abs();
 
   }
 }

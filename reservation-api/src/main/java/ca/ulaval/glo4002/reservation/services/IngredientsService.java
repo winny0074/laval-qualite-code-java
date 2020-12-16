@@ -14,6 +14,7 @@ import ca.ulaval.glo4002.reservation.domain.exception.reservationException.Inval
 import ca.ulaval.glo4002.reservation.services.assemblers.OrderInTotalFormatDtoAssembler;
 import ca.ulaval.glo4002.reservation.services.assemblers.OrderInUnitFormatDtoAssembler;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +59,12 @@ public class IngredientsService {
       throws InvalidFormat {
     Map<GloDateTime, IngredientList> ingredientListMapByDate = validateDatesAndMakeIngredientListMap(startDate, endDate);
     return orderInTotalFormatDtoAssembler.from(ingredientListMapByDate);
+  }
+
+  public BigDecimal getTotalExpense() throws InvalidFormat {
+    OrderInTotalFormatDto ingredientsToOrderInTotalFormat = getIngredientsToOrderInTotalFormat(restaurant.getContext().getEventPeriodStartDate().toPresentationDateFormat(),
+                                                                                               restaurant.getContext().getEventPeriodEndDate().toPresentationDateFormat());
+    return BigDecimal.valueOf(ingredientsToOrderInTotalFormat.getTotalPrice());
   }
 
   public Map<GloDateTime, IngredientList> validateDatesAndMakeIngredientListMap(String startDate, String endDate) {
